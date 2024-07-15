@@ -1,0 +1,7 @@
+[requires]
+libpqxx/7.9.1
+zlib/1.2.11
+
+[generators]
+CMakeDeps
+CMakeToolchain
