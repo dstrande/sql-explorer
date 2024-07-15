@@ -1,2 +1,2 @@
 # sql-explorer
-Currently a way to practice C++ and SQL (Postgres)
+Currently a way for me to practice C++ (Qt) and SQL (Postgres).
