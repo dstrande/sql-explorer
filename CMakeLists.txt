@@ -10,8 +10,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_SOURCES
-        main.cpp
+        src/main.cpp
 )
+
+include_directories("~/.conan2") 
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
