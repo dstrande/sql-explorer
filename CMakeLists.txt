@@ -11,6 +11,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_SOURCES
         src/main.cpp
+        src/sqlsearch.cpp
+        src/sqlsearch.h
+        src/sqlsearch.ui
 )
 
 include_directories("~/.conan2") 
@@ -18,8 +21,7 @@ include_directories("~/.conan2")
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 find_package(libpqxx REQUIRED)
-find_package(ZLIB REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 target_link_libraries(${PROJECT_NAME} libpqxx::pqxx)
-target_link_libraries(${PROJECT_NAME} ZLIB::ZLIB)
-# target_link_libraries(${PROJECT_NAME} PRIVATE pqxx)
+target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
