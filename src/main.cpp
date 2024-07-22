@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "sqlsearch.h"
+#include "sqlexplorer.h"
 #include <iostream>
 
 #include <QApplication>
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     printf("pqxx VERSION: %s\n", PQXX_VERSION);
 
     QApplication a(argc, argv);
-    sqlSearch w;
+    sqlExplorer w;
     w.show();
     return a.exec();
 }

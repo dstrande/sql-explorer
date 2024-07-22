@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(compressor VERSION 0.1 LANGUAGES CXX)
+project(sqlExplorer VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -11,9 +11,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_SOURCES
         src/main.cpp
-        src/sqlsearch.cpp
-        src/sqlsearch.h
-        src/sqlsearch.ui
+        src/sqlexplorer.cpp
+        src/sqlexplorer.h
+        src/sqlexplorer.ui
 )
 
 include_directories("~/.conan2") 
