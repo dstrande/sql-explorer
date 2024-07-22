@@ -5,19 +5,19 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class sqlSearch;
+class sqlExplorer;
 }
 QT_END_NAMESPACE
 
-class sqlSearch : public QMainWindow
+class sqlExplorer : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    sqlSearch(QWidget *parent = nullptr);
-    ~sqlSearch();
+    sqlExplorer(QWidget *parent = nullptr);
+    ~sqlExplorer();
 
 private:
-    Ui::sqlSearch *ui;
+    Ui::sqlExplorer *ui;
 };
 #endif // SQLSEARCH_H
