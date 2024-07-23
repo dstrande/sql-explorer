@@ -38,6 +38,8 @@ Thumbs.db
 # building
 out
 build
+conan
+conan2
 
 # qtcreator generated files
 *.pro.user*
