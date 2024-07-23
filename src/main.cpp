@@ -5,6 +5,8 @@
 #include <iostream>
 
 #include <QApplication>
+#include <QDebug>
+#include <QLibraryInfo>
 #include <pqxx/pqxx>
 
 
@@ -15,6 +17,11 @@ int main(int argc, char *argv[]) {
     char buffer_out [256] = {0};
 
     printf("pqxx VERSION: %s\n", PQXX_VERSION);
+    qDebug() << "Version:" << QLibraryInfo::version();
+    qDebug() << "Prefix :" << QLibraryInfo::location(QLibraryInfo::PrefixPath);
+    qDebug() << "Libs   :" << QLibraryInfo::location(QLibraryInfo::LibrariesPath);
+    qDebug() << "Plugins:" << QLibraryInfo::location(QLibraryInfo::PluginsPath);
+    qDebug() << "Libexec:" << QLibraryInfo::location(QLibraryInfo::LibraryExecutablesPath);
 
     QApplication a(argc, argv);
     sqlExplorer w;

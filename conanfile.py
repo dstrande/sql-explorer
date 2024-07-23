@@ -7,9 +7,8 @@ class ExampleRecipe(ConanFile):
     generators = "CMakeDeps", "CMakeToolchain"
 
     def requirements(self):
-        self.requires("qt/6.7.1")
+        self.requires("qt/5.15.14")
         self.requires("libpqxx/7.9.1")
-        self.requires("zlib/1.2.11")
 
     def layout(self):
         cmake_layout(self)

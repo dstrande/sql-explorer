@@ -16,12 +16,19 @@ set(PROJECT_SOURCES
         src/sqlexplorer.ui
 )
 
-include_directories("~/.conan2") 
+include_directories("~/.conan2")
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 find_package(libpqxx REQUIRED)
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
 
 target_link_libraries(${PROJECT_NAME} libpqxx::pqxx)
-target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
+target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+
+include(GNUInstallDirs)
+install(TARGETS ${PROJECT_NAME}
+    BUNDLE DESTINATION .
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
