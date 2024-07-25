@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.16)
 
 project(sqlExplorer VERSION 0.1 LANGUAGES CXX)
 
@@ -8,6 +8,9 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(BUILD_SHARED_LIBS FALSE)
+set(CMAKE_EXE_LINKER_FLAGS '-static')
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -21,14 +24,8 @@ include_directories("~/.conan2")
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 find_package(libpqxx REQUIRED)
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} libpqxx::pqxx)
-target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
-
-include(GNUInstallDirs)
-install(TARGETS ${PROJECT_NAME}
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
+target_link_libraries(${PROJECT_NAME} "/home/dal/.conan2/p/b/qt52cf5a760f2fd/p/plugins/platforms/libqxcb.a")
