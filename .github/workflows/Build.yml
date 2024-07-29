@@ -12,6 +12,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Set up GCC
+      uses: egor-tensin/setup-gcc@v1
+      with:
+        version: 11
+        platform: x64
+
     - name: Install latest cmake and ninja
       uses: lukka/get-cmake@latest
 
