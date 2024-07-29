@@ -10,7 +10,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BUILD_SHARED_LIBS FALSE)
-set(CMAKE_EXE_LINKER_FLAGS '-static')
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -28,4 +27,3 @@ find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} libpqxx::pqxx)
 target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
-target_link_libraries(${PROJECT_NAME} "/home/dal/.conan2/p/b/qt52cf5a760f2fd/p/plugins/platforms/libqxcb.a")
