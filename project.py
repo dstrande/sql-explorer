@@ -32,7 +32,7 @@ class Project:
 
     def run(self):
         print(f'---RUN {self.name}---')
-        binary = self.root / 'conanfiles/build/Release/sqlExplorer'
+        binary = self.root / 'conanfiles/build/Release/sqlExplorer -platform offscreen'
         system_call(f'timeout 10 {binary}')
 
     def clear(self, clear_conan: bool = False):
