@@ -33,7 +33,14 @@ class Project:
     def run(self):
         print(f'---RUN {self.name}---')
         binary = self.root / 'conanfiles/build/Release/sqlExplorer -platform offscreen'
-        system_call(f'timeout 10 {binary}')
+        command = f'timeout 5 {binary}'
+        output = subprocess.call(command, shell=True, executable='/bin/bash')
+
+        # Success if "timeout" did exit by timing out (code 124)
+        if output == 124:
+            exit(0)
+        else:
+            exit(1)
 
     def clear(self, clear_conan: bool = False):
         # rm -rf ./build ./conanfiles
