@@ -32,8 +32,8 @@ class Project:
 
     def run(self):
         print(f'---RUN {self.name}---')
-        binary = self.root / 'conanfiles/build/Release/cpp_template'
-        system_call(f'{binary}')
+        binary = self.root / 'conanfiles/build/Release/sqlExplorer'
+        system_call(f'timeout 10 {binary}')
 
     def clear(self, clear_conan: bool = False):
         # rm -rf ./build ./conanfiles
