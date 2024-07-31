@@ -1,6 +1,5 @@
 #include "secrets.h"
 #include "credentials.h"
-#include <iostream>
 
 
 std::string combinedCreds()
