@@ -16,6 +16,9 @@ set(PROJECT_SOURCES
         src/sqlexplorer.cpp
         src/sqlexplorer.h
         src/sqlexplorer.ui
+        src/query.h
+        src/credentials.cpp
+        src/credentials.h
 )
 
 include_directories("~/.conan2")

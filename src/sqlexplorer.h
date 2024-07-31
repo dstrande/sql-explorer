@@ -2,6 +2,7 @@
 #define SQLSEARCH_H
 
 #include <QMainWindow>
+#include "query.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,5 +20,9 @@ public:
 
 private:
     Ui::sqlExplorer *ui;
+    QString queryText;
+
+private slots:
+    void queryCommand();
 };
 #endif // SQLSEARCH_H
