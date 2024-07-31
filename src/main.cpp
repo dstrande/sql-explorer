@@ -11,7 +11,6 @@
 #include <pqxx/pqxx>
 
 
-
 int main(int argc, char *argv[]) {
     std::string db_name = DB_NAME;
     std::string host_addr = HOST_ADDR;
@@ -36,11 +35,29 @@ int main(int argc, char *argv[]) {
             std::cout << "Opened database successfully: " << dbConn.dbname() << std::endl;
             pqxx::work txn{dbConn};
 
-            pqxx::result r = txn.exec("SELECT * FROM pg_catalog.pg_tables;");
+            pqxx::result r = txn.exec("SELECT table_name FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema='public';");
 
-            for (auto name : r[0])
+            std::cout << r.size() << "\n";
+            std::cout << r.columns() << "\n";
+
+            for (auto row : r)
                 {
-                    std::cout << name.c_str() << "\n";
+                    for (auto col : row)
+                        {std::cout << row.size() << ", " << col.size() << "\n";}
+                }
+
+            std::cout << "Columns:\n";
+            for (pqxx::row_size_type col = 0; col < r.columns(); ++col)
+                {
+                    for (int row = 0; row < r.size(); ++row)
+                    {
+                        std::cout << col << ", " << row << ": " << r[row][col].c_str() << '\n';
+                    }
+                }
+            
+            for (auto row : r[0])
+                {
+                    std::cout << row << "\n";
                 }
 
         } else {
@@ -54,13 +71,11 @@ int main(int argc, char *argv[]) {
 
     printf("pqxx VERSION: %s\n", PQXX_VERSION);
 
-    pqxx::connection dbConn(combine);
-
     qDebug() << "Version:" << QLibraryInfo::version();
-    qDebug() << "Prefix :" << QLibraryInfo::location(QLibraryInfo::PrefixPath);
-    qDebug() << "Libs   :" << QLibraryInfo::location(QLibraryInfo::LibrariesPath);
-    qDebug() << "Plugins:" << QLibraryInfo::location(QLibraryInfo::PluginsPath);
-    qDebug() << "Libexec:" << QLibraryInfo::location(QLibraryInfo::LibraryExecutablesPath);
+    // qDebug() << "Prefix :" << QLibraryInfo::location(QLibraryInfo::PrefixPath);
+    // qDebug() << "Libs   :" << QLibraryInfo::location(QLibraryInfo::LibrariesPath);
+    // qDebug() << "Plugins:" << QLibraryInfo::location(QLibraryInfo::PluginsPath);
+    // qDebug() << "Libexec:" << QLibraryInfo::location(QLibraryInfo::LibraryExecutablesPath);
 
     QApplication a(argc, argv);
     sqlExplorer w;
