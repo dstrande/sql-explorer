@@ -1,11 +1,13 @@
-#include "sqlexplorer.h"
 #include "./ui_sqlexplorer.h"
+#include "sqlexplorer.h"
 #include "credentials.h"
 
 #include <QDebug>
 #include <QLibraryInfo>
 #include <pqxx/pqxx>
 #include <iostream>
+#include <QStandardItemModel>
+
 
 sqlExplorer::sqlExplorer(QWidget *parent)
     : QMainWindow(parent)
@@ -19,14 +21,21 @@ sqlExplorer::sqlExplorer(QWidget *parent)
 //     //Connect ui components to respective slots
 //     connect(ui->queryEditor,&QTextEdit::textChanged,
 //             this,&Widget::weight_changed);
+    connect(ui->queryButton,&QPushButton::pressed,
+            this,&sqlExplorer::queryCommand);
 
     printf("pqxx VERSION: %s\n", PQXX_VERSION);
     qDebug() << "Version:" << QLibraryInfo::version();
 
-    queryCommand(queryText.toStdString());
+    queryCommand();
 }
 
-void sqlExplorer::queryCommand(std::string queryText)
+// void sqlExplorer::newQuery() // std::string queryText
+// {
+//     queryCommand(queryText);
+// }
+
+void sqlExplorer::queryCommand() // std::string queryText
 {
     try{
         std::string combine = combinedCreds();
@@ -37,18 +46,25 @@ void sqlExplorer::queryCommand(std::string queryText)
             pqxx::work txn{dbConn};
 
             // pqxx::result r = txn.exec("SELECT table_name FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema='public';");
-            pqxx::result r = txn.exec(queryText);
+            queryText = ui->queryEditor->toPlainText();
+            pqxx::result r = txn.exec(queryText.toStdString());
             
             std::cout << r.columns() << "\n";
             std::cout << r.size() << "\n";
-            
-            std::cout << r[1][1] << "\n";
+            // std::cout << typeid(r.columns()).name() << "\n";
 
-            for (auto row : r)
-                {
-                    for (auto col : row)
-                        {std::cout << col << "\n";}
+            model = new QStandardItemModel(r.size(), r.columns());
+
+            for (int row = 0; row < model->rowCount(); ++row) {
+                for (int column = 0; column < model->columnCount(); ++column) {
+                    QStandardItem *item = new QStandardItem(QString(r[row][column].c_str())); // "row %0, column %1").arg(row).arg(column
+                    model->setItem(row, column, item);
                 }
+            }
+
+            ui->resultsView->setModel(model);
+            ui->resultsView->resizeColumnsToContents();
+
 
             // std::cout << "Columns:\n";
             // for (pqxx::row_size_type col = 0; col < r.columns(); ++col)
