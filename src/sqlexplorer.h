@@ -1,8 +1,11 @@
-#ifndef SQLSEARCH_H
-#define SQLSEARCH_H
+#ifndef SQLEXPLORER_H
+#define SQLEXPLORER_H
 
 #include <QMainWindow>
 #include "query.h"
+
+
+class QStandardItemModel;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,9 +23,12 @@ public:
 
 private:
     Ui::sqlExplorer *ui;
+    QStandardItemModel *model;
     QString queryText;
 
 private slots:
-    void queryCommand();
+    void queryCommand();  // std::string queryText
+    // void newQuery(std::string queryText);
 };
-#endif // SQLSEARCH_H
+
+#endif // SQLEXPLORER_H
