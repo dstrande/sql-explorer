@@ -23,6 +23,6 @@ private:
     QString queryText;
 
 private slots:
-    void queryCommand();
+    void queryCommand(std::string queryText);
 };
 #endif // SQLSEARCH_H

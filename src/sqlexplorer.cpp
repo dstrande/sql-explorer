@@ -23,10 +23,10 @@ sqlExplorer::sqlExplorer(QWidget *parent)
     printf("pqxx VERSION: %s\n", PQXX_VERSION);
     qDebug() << "Version:" << QLibraryInfo::version();
 
-    queryCommand();
+    queryCommand(queryText.toStdString());
 }
 
-void sqlExplorer::queryCommand()
+void sqlExplorer::queryCommand(std::string queryText)
 {
     try{
         std::string combine = combinedCreds();
@@ -37,7 +37,7 @@ void sqlExplorer::queryCommand()
             pqxx::work txn{dbConn};
 
             // pqxx::result r = txn.exec("SELECT table_name FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema='public';");
-            pqxx::result r = txn.exec(queryText.toStdString());
+            pqxx::result r = txn.exec(queryText);
             
             std::cout << r.columns() << "\n";
             std::cout << r.size() << "\n";
