@@ -1,12 +1,14 @@
 #include "./ui_sqlexplorer.h"
 #include "sqlexplorer.h"
 #include "credentials.h"
+#include "examples.h"
 
 #include <QDebug>
 #include <QLibraryInfo>
 #include <pqxx/pqxx>
 #include <iostream>
 #include <QStandardItemModel>
+#include <QTextCursor>
 
 
 sqlExplorer::sqlExplorer(QWidget *parent)
@@ -15,16 +17,75 @@ sqlExplorer::sqlExplorer(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //Initializer the members with values from the ui
+    // Initializer the members with values from the ui
     queryText = ui->queryEditor->toPlainText();
 
     connect(ui->queryButton,&QPushButton::pressed,
             this,&sqlExplorer::queryCommand);
 
+    // Connect example QActions to text
+    connect(ui->actionSELECT,&QAction::triggered,[=](){
+        ui->queryEditor->setText(selectText);
+    });
+    connect(ui->actionSELECT,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionINSERT,&QAction::triggered,[=](){
+        ui->queryEditor->setText(insertText);
+    });
+    connect(ui->actionINSERT,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionALTER_TABLE,&QAction::triggered,[=](){
+        ui->queryEditor->setText(alterTableText);
+    });
+    connect(ui->actionALTER_TABLE,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionCREATE_TABLE,&QAction::triggered,[=](){
+        ui->queryEditor->setText(createTableText);
+    });
+    connect(ui->actionCREATE_TABLE,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionDELETE,&QAction::triggered,[=](){
+        ui->queryEditor->setText(deleteText);
+    });
+    connect(ui->actionDELETE,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionDROP_TABLE,&QAction::triggered,[=](){
+        ui->queryEditor->setText(dropTableText);
+    });
+    connect(ui->actionDROP_TABLE,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionJOIN,&QAction::triggered,[=](){
+        ui->queryEditor->setText(joinText);
+    });
+    connect(ui->actionJOIN,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionORDER_BY,&QAction::triggered,[=](){
+        ui->queryEditor->setText(orderByText);
+    });
+    connect(ui->actionORDER_BY,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionUPDATE,&QAction::triggered,[=](){
+        ui->queryEditor->setText(updateText);
+    });
+    connect(ui->actionUPDATE,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
+    connect(ui->actionWHERE,&QAction::triggered,[=](){
+        ui->queryEditor->setText(whereText);
+    });
+    connect(ui->actionWHERE,&QAction::triggered,
+            this,&sqlExplorer::setFontSize);
+
     printf("pqxx VERSION: %s\n", PQXX_VERSION);
     qDebug() << "Version:" << QLibraryInfo::version();
-
-    queryCommand();
 }
 
 void sqlExplorer::queryCommand()
@@ -40,7 +101,7 @@ void sqlExplorer::queryCommand()
             // SELECT table_name FROM information_schema.tables WHERE table_type='BASE TABLE' AND table_schema='public';
             queryText = ui->queryEditor->toPlainText();
             pqxx::result r = txn.exec(queryText.toStdString());
-            
+
             std::cout << r.columns() << "\n";
             std::cout << r.size() << "\n";
 
@@ -62,6 +123,15 @@ void sqlExplorer::queryCommand()
     }catch (const std::exception &e){
         std::cerr << e.what() << std::endl;
     }
+}
+
+void sqlExplorer::setFontSize()
+{
+    QTextCursor cursor = ui->queryEditor->textCursor();
+    ui->queryEditor->selectAll();
+    ui->queryEditor->setFontFamily("Ubuntu");
+    ui->queryEditor->setFontPointSize(12);
+    ui->queryEditor->setTextCursor(cursor);
 }
 
 sqlExplorer::~sqlExplorer()

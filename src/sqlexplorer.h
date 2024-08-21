@@ -27,7 +27,8 @@ private:
     QString queryText;
 
 private slots:
-    void queryCommand();  // std::string queryText
+    void queryCommand();
+    void setFontSize();
     // void newQuery(std::string queryText);
 };
 

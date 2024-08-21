@@ -9,9 +9,9 @@ class Query : public QObject
 
 public:
     QString query() const {return queryText;}
- 
+
 private:
-    QString queryText="SELECT * FROM language\nLIMIT 10;";
+    QString queryText="SELECT * FROM table\nLIMIT 10;";
 };
 
-#endif // PERSON_H
+#endif // QUERY_H
