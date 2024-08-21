@@ -15,4 +15,3 @@ private:
 };
 
 #endif // PERSON_H
-
