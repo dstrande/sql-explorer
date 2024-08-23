@@ -107,8 +107,10 @@ void sqlExplorer::queryCommand()
 
             model = new QStandardItemModel(r.size(), r.columns());
 
-            for (int row = 0; row < model->rowCount(); ++row) {
-                for (int column = 0; column < model->columnCount(); ++column) {
+            for (int column = 0; column < model->columnCount(); ++column) {
+                QStandardItem *infoItem = new QStandardItem(r.column_name(column));
+                model->setHorizontalHeaderItem(column, infoItem);
+                for (int row = 0; row < model->rowCount(); ++row) {
                     QStandardItem *item = new QStandardItem(QString(r[row][column].c_str()));
                     model->setItem(row, column, item);
                 }
