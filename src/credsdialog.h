@@ -2,6 +2,7 @@
 #define CREDSDIALOG_H
 
 #include <QDialog>
+#include <iostream>
 
 
 QT_BEGIN_NAMESPACE
@@ -19,6 +20,12 @@ public:
 
 private:
     Ui::credsDialog *ui;
+    QString addressText;
+    QString dbNameText;
+    QString passwordText;
+    QString portText;
+    QString usernameText;
+    QString combine;
 };
 
 #endif // CREDSDIALOG_H

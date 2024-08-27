@@ -1,6 +1,6 @@
 #include "./ui_sqlexplorer.h"
 #include "sqlexplorer.h"
-#include "credentials.h"
+#include "credsdialog.h"
 #include "examples.h"
 
 #include <QDebug>
@@ -16,6 +16,8 @@ sqlExplorer::sqlExplorer(QWidget *parent)
     , ui(new Ui::sqlExplorer)
 {
     ui->setupUi(this);
+
+
 
     // Initializer the members with values from the ui
     queryText = ui->queryEditor->toPlainText();
@@ -91,8 +93,8 @@ sqlExplorer::sqlExplorer(QWidget *parent)
 void sqlExplorer::queryCommand()
 {
     try{
-        std::string combine = combinedCreds();
-        pqxx::connection dbConn(combine);
+        // std::string combine = combine.toStdString();
+        pqxx::connection dbConn("combine");
 
         if (dbConn.is_open()) {
             std::cout << "Opened database successfully: " << dbConn.dbname() << std::endl;
