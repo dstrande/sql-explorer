@@ -7,8 +7,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    credsDialog dia;
-    dia.show();
+    // credsDialog dia;
+    // dia.show();
 
     sqlExplorer wid;
     wid.show();

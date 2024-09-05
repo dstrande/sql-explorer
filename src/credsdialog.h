@@ -19,6 +19,18 @@ public:
 
 private:
     Ui::credsDialog *ui;
+    QString addressText;
+    QString dbNameText;
+    QString passwordText;
+    QString portText;
+    QString usernameText;
+    QString combine;
+
+signals:
+   void signalCreds(QString combineSlot);
+
+private slots:
+    void triggerSignal();
 };
 
 #endif // CREDSDIALOG_H
