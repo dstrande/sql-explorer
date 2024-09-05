@@ -1,11 +1,16 @@
 #include "sqlexplorer.h"
+#include "credsdialog.h"
 #include <QApplication>
 
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    sqlExplorer w;
-    w.show();
-    return a.exec();
+    QApplication app(argc, argv);
+
+    // credsDialog dia;
+    // dia.show();
+
+    sqlExplorer wid;
+    wid.show();
+    return app.exec();
 }

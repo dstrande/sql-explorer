@@ -20,15 +20,19 @@ class sqlExplorer : public QMainWindow
 public:
     sqlExplorer(QWidget *parent = nullptr);
     ~sqlExplorer();
+    void linkCreds();
+    void setCreds();
 
 private:
     Ui::sqlExplorer *ui;
     QStandardItemModel *model;
     QString queryText;
+    std::string combineSlotStr;
 
 private slots:
     void queryCommand();
     void setFontSize();
+    void setCreds(QString combineSlot);
     // void newQuery(std::string queryText);
 };
 
