@@ -32,7 +32,5 @@ void credsDialog::triggerSignal()
     combine.append(" port=");
     combine.append(portText);
 
-    std::cout << "Received credentials: " << combine.toStdString() << std::endl;
-
     emit signalCreds(combine);
 }

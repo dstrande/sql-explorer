@@ -1,6 +1,5 @@
 #include "./ui_sqlexplorer.h"
 #include "sqlexplorer.h"
-#include "credentials.h"
 #include "examples.h"
 #include "credsdialog.h"
 
@@ -101,9 +100,7 @@ void sqlExplorer::queryCommand()
             std::cerr << "Error: Credentials string is empty." << std::endl;
             return;  // Exit early if no credentials are available
         }
-
         std::string combine = combineSlotStr;
-        std::cout << "Received credentials: " << combine << std::endl;
         pqxx::connection dbConn(combine);
 
         if (dbConn.is_open()) {
@@ -143,9 +140,6 @@ void sqlExplorer::queryCommand()
 void sqlExplorer::setCreds(QString combineSlot)
 {
     combineSlotStr = combineSlot.toStdString();
-
-    qDebug() << "Credentials received and stored in combineSlotStr: " << QString::fromStdString(combineSlotStr);
-    std::cout << "Received credentials: " << combineSlotStr << std::endl;
 }
 
 

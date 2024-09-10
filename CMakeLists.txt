@@ -17,8 +17,6 @@ set(PROJECT_SOURCES
         src/sqlexplorer.h
         src/sqlexplorer.ui
         src/query.h
-        src/credentials.cpp
-        src/credentials.h
         src/credsdialog.cpp
         src/credsdialog.h
         src/credsDialog.ui
